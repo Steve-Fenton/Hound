@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/Hound/bin/Debug/netcoreapp2.0
+/Hound/obj
+/Hound.Tests/bin/Debug/netcoreapp2.0
+/Hound.Tests/obj
+/TestResults/aadc8eab-3937-42f8-8c40-26705a5ece2f
+/Hound.Tests/appsettings.json

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hound", "Hound\Hound.csproj", "{73DFB2F7-234A-4E6D-AFBE-7D584D90A894}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hound.Tests", "Hound.Tests\Hound.Tests.csproj", "{695E856A-D01D-4F81-95C3-33BDB5CC8919}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73DFB2F7-234A-4E6D-AFBE-7D584D90A894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73DFB2F7-234A-4E6D-AFBE-7D584D90A894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73DFB2F7-234A-4E6D-AFBE-7D584D90A894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73DFB2F7-234A-4E6D-AFBE-7D584D90A894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695E856A-D01D-4F81-95C3-33BDB5CC8919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695E856A-D01D-4F81-95C3-33BDB5CC8919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695E856A-D01D-4F81-95C3-33BDB5CC8919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695E856A-D01D-4F81-95C3-33BDB5CC8919}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D12B8F00-AB70-420E-A7E4-81DD42509043}
+	EndGlobalSection
+EndGlobal
