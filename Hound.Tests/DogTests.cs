@@ -29,7 +29,7 @@ namespace Hound.Tests
             DogEvents target = new DogEvents(_testApiKey);
             HoundEvent data = GetTestEvent();
 
-            var eventResponse = await target.Publish(data);
+            HoundResult eventResponse = await target.Publish(data);
 
             eventResponse.IsSuccess.ShouldBe(true);
         }
@@ -40,7 +40,7 @@ namespace Hound.Tests
             DogMetrics target = new DogMetrics(_testApiKey);
             HoundMetricCollection data = GetTestMetrics();
 
-            var eventResponse = await target.RaiseMetric(data);
+            HoundResult eventResponse = await target.RaiseMetric(data);
 
             eventResponse.IsSuccess.ShouldBe(true);
         }
