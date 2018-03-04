@@ -2,6 +2,69 @@
 
 A C# library for publishing events and metrics to Datadog via the Datadog API.
 
+Includes a simple exception logger that logs directly to Datadog, in a swappable way if you change your strategy later.
+
+## LogHound
+
+You can call LogHound to store exceptions as simply as:
+
+    LogHound.LogException(apiKey, ex);
+
+A full example is below.
+
+    try
+    {
+        throw new AuthorException("Hound-001", "Sheridan Le Fanu");
+    }
+    catch (HoundException ex)
+    {
+        LogHound.LogException(apiKey, ex);
+    }
+    catch (Exception ex)
+    {
+        LogHound.LogException(apiKey, new UnexpectedException("Hound-001", ex));
+    }
+
+To isolate yourself from LogHound, in case you decide to use something else later; isolate yourself from the specific HoundException type by creating your own tree of exception types:
+
+    public class MyCompanyException
+        : HoundException
+    {
+        public MyCompanyException(string host, string message)
+            : base(host, message)
+        {
+            Severity = HoundEventType.Error;
+        }
+    }
+
+If you are handling other exceptions, you can wrap them:
+
+    public class MyWrapperException
+        : HoundException
+    {
+        public MyWrapperException(string host, Exception innerException)
+            : base(host, "General exception caught.", innerException)
+        {
+            Severity = HoundEventType.Error;
+        }
+    }
+
+### Severity
+
+You may find it useful to have errors of different severities. LogHound allows success, info, warning, error.
+
+You can set this in the constructor of your custom exception types.
+
+    public class TestException
+        : HoundException
+    {
+        public TestException(string host, string author)
+            : base(host, $"The author is {author}")
+        {
+            Severity = HoundEventType.Error;
+        }
+    }
+
 ## Events
 
 Create an event:
@@ -17,7 +80,7 @@ Create an event:
 
 Publish the event:
 
-    DogEvents target = new DogEvents(apiKey);
+    IEventDestination target = new DogEvents(apiKey);
     HoundResult eventResponse = await target.Publish(data);
 
 The ```eventResponse.IsSuccess``` boolean indicates success, and if this is false, you can check out the exception under ```eventResponse.Error```.
@@ -54,7 +117,7 @@ Create a metric collection:
 
 Publish the metrics:
 
-    DogMetrics target = new DogMetrics(apiKey);
+    IMetricDestination target = new DogMetrics(apiKey);
     HoundResult eventResponse = await target.RaiseMetric(data);
 
 The ```eventResponse.IsSuccess``` boolean indicates success, and if this is false, you can check out the exception under ```eventResponse.Error```.

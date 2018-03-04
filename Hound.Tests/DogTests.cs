@@ -1,8 +1,6 @@
-using Microsoft.Extensions.Configuration;
 using Shouldly;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,13 +12,8 @@ namespace Hound.Tests
 
         public DogTests()
         {
-            string configPath = Path.Combine(Environment.CurrentDirectory, "appsettings.json");
-
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .AddJsonFile(configPath, optional: true)
-                .Build();
-
-            _testApiKey = configuration["DatadogApiKey"];
+            ApiKey key = new TestApiKey();
+            _testApiKey = key.GetApiKey();
         }
 
         [Fact]
@@ -31,7 +24,7 @@ namespace Hound.Tests
 
             HoundResult eventResponse = await target.Publish(data);
 
-            eventResponse.IsSuccess.ShouldBe(true);
+            eventResponse.IsSuccess.ShouldBeTrue();
         }
 
         [Fact]
@@ -42,7 +35,7 @@ namespace Hound.Tests
 
             HoundResult eventResponse = await target.RaiseMetric(data);
 
-            eventResponse.IsSuccess.ShouldBe(true);
+            eventResponse.IsSuccess.ShouldBeTrue();
         }
 
         [Fact]
