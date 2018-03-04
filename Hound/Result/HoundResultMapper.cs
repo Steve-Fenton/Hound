@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Hound
+namespace Hound.Result
 {
     internal static class HoundResultMapper
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 
-namespace Hound
+namespace Hound.Metrics
 {
     internal static class HoundMetricCollectionMapper
     {

@@ -1,4 +1,6 @@
 ﻿using Hound.Datadog;
+using Hound.Metrics;
+using Hound.Result;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;

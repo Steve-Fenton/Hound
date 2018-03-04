@@ -48,10 +48,10 @@ namespace Hound.Tests
         [Fact]
         public void EventTypeStringIsCorrect()
         {
-            EventTypeMapper.GetString(HoundEventType.Success).ShouldBe("success");
-            EventTypeMapper.GetString(HoundEventType.Info).ShouldBe("info");
-            EventTypeMapper.GetString(HoundEventType.Warning).ShouldBe("warning");
-            EventTypeMapper.GetString(HoundEventType.Error).ShouldBe("error");
+            HoundEventTypeMapper.GetString(HoundEventType.Success).ShouldBe("success");
+            HoundEventTypeMapper.GetString(HoundEventType.Info).ShouldBe("info");
+            HoundEventTypeMapper.GetString(HoundEventType.Warning).ShouldBe("warning");
+            HoundEventTypeMapper.GetString(HoundEventType.Error).ShouldBe("error");
         }
 
         private static HoundEvent GetTestEvent()

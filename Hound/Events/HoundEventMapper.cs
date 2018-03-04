@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Net.Http;
 
-namespace Hound
+namespace Hound.Events
 {
     internal static class HoundEventMapper
     {
@@ -11,7 +11,7 @@ namespace Hound
             var eventRequest = new EventRequest
             {
                 AggregationKey = houndEvent.AggregationKey,
-                AlertType = EventTypeMapper.GetString(houndEvent.AlertType),
+                AlertType = HoundEventTypeMapper.GetString(houndEvent.AlertType),
                 Host = houndEvent.Host,
                 SourceTypeName = houndEvent.SourceTypeName,
                 Text = houndEvent.Text,

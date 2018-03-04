@@ -8,7 +8,7 @@
         Success
     }
 
-    public static class EventTypeMapper
+    public static class HoundEventTypeMapper
     {
         public static string GetString(HoundEventType eventType)
         {
