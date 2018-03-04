@@ -26,7 +26,7 @@ namespace Hound.Tests
         [Fact]
         public async Task RaiseErrorShouldBeSuccessful()
         {
-            DogEvents target = new DogEvents(_testApiKey);
+            IEventDestination target = new DogEvents(_testApiKey);
             HoundEvent data = GetTestEvent();
 
             HoundResult eventResponse = await target.Publish(data);
@@ -37,7 +37,7 @@ namespace Hound.Tests
         [Fact]
         public async Task RaiseMetricShouldBeSuccessful()
         {
-            DogMetrics target = new DogMetrics(_testApiKey);
+            IMetricDestination target = new DogMetrics(_testApiKey);
             HoundMetricCollection data = GetTestMetrics();
 
             HoundResult eventResponse = await target.RaiseMetric(data);

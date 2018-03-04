@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hound
 {
-    public class DogEvents
+    public class DogEvents : IEventDestination
     {
         private readonly DatadogEventApi _datadogApi;
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hound
 {
-    public class DogMetrics
+    public class DogMetrics : IMetricDestination
     {
         private readonly DatadogMetricApi _datadogApi;
 
