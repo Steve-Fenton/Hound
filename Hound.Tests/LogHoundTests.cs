@@ -58,6 +58,20 @@ namespace Hound.Tests
         }
 
         [Fact]
+        public void GeneralExceptionNotWrappedShouldBeSuccess()
+        {
+            try
+            {
+                throw new Exception("An example of a general exception");
+            }
+            catch (Exception ex)
+            {
+                HoundResult result = LogHound.LogException(_testApiKey, ex);
+                result.IsSuccess.ShouldBeTrue();
+            }
+        }
+
+        [Fact]
         public void InvalidApiKeyShouldBeFailureNotException()
         {
             HoundResult result = LogHound.LogException("NULL", new TestException("Hound-001", "Mary Shelley"));

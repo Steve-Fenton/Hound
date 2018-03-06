@@ -33,5 +33,10 @@ namespace Hound
         {
             HostName = host;
         }
+
+        internal HoundException(Exception innerException) : base ("Unexpected Exception", innerException)
+        {
+            HostName = "Unknown Host";
+        }
     }
 }
