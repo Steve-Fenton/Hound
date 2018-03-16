@@ -4,6 +4,8 @@ A C# library for publishing events and metrics to Datadog via the Datadog API.
 
 Includes a simple exception logger that logs directly to Datadog, in a swappable way if you change your strategy later.
 
+!(Hound)[https://www.stevefenton.co.uk/wp-content/uploads/2018/03/hound-300x300.png]
+
 ## LogHound
 
 You can call LogHound to store exceptions as simply as:
@@ -14,7 +16,7 @@ A full example is below.
 
     try
     {
-        throw new AuthorException("Hound-001", "Sheridan Le Fanu");
+        throw new AuthorException("Sheridan Le Fanu");
     }
     catch (HoundException ex)
     {
@@ -22,32 +24,22 @@ A full example is below.
     }
     catch (Exception ex)
     {
-        LogHound.LogException(apiKey, new UnexpectedException("Hound-001", ex));
+        LogHound.LogException(apiKey, new HoundException("Unexpected Exception!", ex));
     }
 
-To isolate yourself from LogHound, in case you decide to use something else later; isolate yourself from the specific HoundException type by creating your own tree of exception types:
+To isolate yourself from ```LogHound```, in case you decide to use something else later; isolate yourself from the specific ```HoundException``` type by creating your own tree of exception types:
 
     public class MyCompanyException
         : HoundException
     {
-        public MyCompanyException(string host, string message)
-            : base(host, message)
+        public MyCompanyException(string message)
+            : base(message)
         {
             Severity = HoundEventType.Error;
         }
     }
 
-If you are handling other exceptions, you can wrap them:
-
-    public class MyWrapperException
-        : HoundException
-    {
-        public MyWrapperException(string host, Exception innerException)
-            : base(host, "General exception caught.", innerException)
-        {
-            Severity = HoundEventType.Error;
-        }
-    }
+You can simply replace ```HoundException``` with ```ApplicationException``` later if you want to.
 
 ### Severity
 
@@ -55,11 +47,11 @@ You may find it useful to have errors of different severities. LogHound allows s
 
 You can set this in the constructor of your custom exception types.
 
-    public class TestException
+    public class AuthorException
         : HoundException
     {
-        public TestException(string host, string author)
-            : base(host, $"The author is {author}")
+        public AuthorException(string author)
+            : base($"Error with author! The author is {author}.")
         {
             Severity = HoundEventType.Error;
         }
