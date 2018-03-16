@@ -10,3 +10,5 @@
 /TestResults/aadc8eab-3937-42f8-8c40-26705a5ece2f
 /Hound.Tests/appsettings.json
 /Hound/bin/Debug
+/Hound/bin/Release
+/Hound.Tests/bin/Release/netcoreapp2.0

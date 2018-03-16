@@ -10,12 +10,31 @@ namespace Hound
 
         public string HostName { get; private set; }
 
-        public HoundException(string host)
+        public HoundException()
             : base()
         {
-            HostName = host;
+            HostName = GetMachineName();
         }
 
+        public HoundException(string message)
+            : base(message)
+        {
+            HostName = GetMachineName();
+        }
+
+        public HoundException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+            HostName = GetMachineName();
+        }
+
+        public HoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            HostName = GetMachineName();
+        }
+
+        #region Host name overloads
         public HoundException(string host, string message)
             : base(message)
         {
@@ -33,10 +52,24 @@ namespace Hound
         {
             HostName = host;
         }
+        #endregion
 
-        internal HoundException(Exception innerException) : base ("Unexpected Exception", innerException)
+        internal HoundException(Exception innerException) 
+            : base ("Unexpected Exception", innerException)
         {
-            HostName = "Unknown Host";
+            HostName = GetMachineName();
+        }
+
+        protected static string GetMachineName()
+        {
+            try
+            {
+                return Environment.MachineName;
+            }
+            catch
+            {
+                return "Unknown Machine (Environment.MachineName Failed)";
+            }
         }
     }
 }
