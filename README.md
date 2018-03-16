@@ -4,7 +4,7 @@ A C# library for publishing events and metrics to Datadog via the Datadog API.
 
 Includes a simple exception logger that logs directly to Datadog, in a swappable way if you change your strategy later.
 
-!(Hound)[https://www.stevefenton.co.uk/wp-content/uploads/2018/03/hound-300x300.png]
+![Hound](https://raw.githubusercontent.com/Steve-Fenton/Hound/master/Hound/hound.png)
 
 ## LogHound
 
