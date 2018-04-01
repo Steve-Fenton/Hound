@@ -72,6 +72,13 @@ namespace Hound.Tests
         }
 
         [Fact]
+        public void MultipleCallsShouldAllBeSuccess()
+        {
+            LogHound.LogException(_testApiKey, new Exception("An example of a general exception"));
+            LogHound.LogException(_testApiKey, new Exception("An example of a general exception"));
+        }
+
+        [Fact]
         public void InvalidApiKeyShouldBeFailureNotException()
         {
             HoundResult result = LogHound.LogException("NULL", new TestException("Hound-001", "Mary Shelley"));
