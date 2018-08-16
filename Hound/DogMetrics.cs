@@ -11,10 +11,12 @@ namespace Hound
         : IMetricDestination
     {
         private readonly DatadogMetricApi _datadogApi;
+        private readonly string _prefix;
 
-        public DogMetrics(string apiKey)
+        public DogMetrics(string apiKey, string prefix = "hound")
         {
             _datadogApi = new DatadogMetricApi(apiKey);
+            _prefix = prefix;
         }
 
         public async Task<HoundResult> RaiseMetric(HoundMetricCollection houndMetricCollection)
@@ -23,7 +25,7 @@ namespace Hound
             {
                 try
                 {
-                    HttpContent content = HoundMetricCollectionMapper.GetHttpContent(houndMetricCollection);
+                    HttpContent content = HoundMetricCollectionMapper.GetHttpContent(houndMetricCollection, _prefix);
 
                     HttpResponseMessage response = await client.PostAsync(_datadogApi.PostMetricUrl, content);
                     response.EnsureSuccessStatusCode();
