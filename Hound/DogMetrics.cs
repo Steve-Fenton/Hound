@@ -16,7 +16,7 @@ namespace Hound
         public DogMetrics(string apiKey, string prefix = "hound")
         {
             _datadogApi = new DatadogMetricApi(apiKey);
-            _prefix = prefix;
+            _prefix = prefix.ToLowerInvariant();
         }
 
         public async Task<HoundResult> RaiseMetric(HoundMetricCollection houndMetricCollection)
