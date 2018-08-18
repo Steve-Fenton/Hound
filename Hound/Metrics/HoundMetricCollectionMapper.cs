@@ -9,7 +9,7 @@ namespace Hound.Metrics
 {
     internal static class HoundMetricCollectionMapper
     {
-        internal static HttpContent GetHttpContent(HoundMetricCollection houndMetricCollection)
+        internal static HttpContent GetHttpContent(HoundMetricCollection houndMetricCollection, string prefix)
         {
             var metricRequest = new MetricRequest
             {
@@ -18,7 +18,7 @@ namespace Hound.Metrics
                     new MetricSeries
                     {
                         Host = houndMetricCollection.Host,
-                        Title = $"hound.{houndMetricCollection.Title.ToLowerInvariant().Replace(' ', '.')}",
+                        Title = $"{prefix}.{houndMetricCollection.Title.ToLowerInvariant().Replace(' ', '.')}",
                         Points = houndMetricCollection.Points.Select(p => new List<decimal> { GetPosixDateTime(p.Timestamp), p.Value } as IEnumerable<decimal>)
                     }
                 }
