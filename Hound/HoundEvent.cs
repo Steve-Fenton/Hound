@@ -1,4 +1,6 @@
-﻿namespace Hound
+﻿using System.Collections.Generic;
+
+namespace Hound
 {
     public class HoundEvent
     {
@@ -16,6 +18,11 @@
         /// The machine, container, or other identity of where the event occurred
         /// </summary>
         public string Host { get; set; }
+
+        /// <summary>
+        /// A list of tags to apply to the event
+        /// </summary>
+        public IEnumerable<string> Tags { get; set; }
 
         /// <summary>
         /// The severity of the event

@@ -15,7 +15,8 @@ namespace Hound.Events
                 Host = houndEvent.Host,
                 SourceTypeName = houndEvent.SourceTypeName,
                 Text = houndEvent.Text,
-                Title = houndEvent.Title
+                Title = houndEvent.Title,
+                Tags = houndEvent.Tags
             };
 
             HttpContent content = new StringContent(JsonConvert.SerializeObject(eventRequest));
