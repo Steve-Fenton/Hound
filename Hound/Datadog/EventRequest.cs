@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Hound.Datadog
 {
@@ -12,6 +13,9 @@ namespace Hound.Datadog
 
         [JsonProperty(PropertyName = "host")]
         public string Host { get; set; }
+
+        [JsonProperty(PropertyName = "tags")]
+        public IEnumerable<string> Tags { get; set; }
 
         [JsonProperty(PropertyName = "alert_type")]
         public string AlertType { get; set; }

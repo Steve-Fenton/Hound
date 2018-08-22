@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hound
 {
@@ -12,7 +13,7 @@ namespace Hound
             _eventDestination = eventDestination;
         }
 
-        public async Task<HoundResult> Publish(HoundException exception)
+        public async Task<HoundResult> Publish(HoundException exception, IEnumerable<string> tags = null)
         {
             HoundEvent houndEvent = new HoundEvent
             {
@@ -20,7 +21,8 @@ namespace Hound
                 AlertType = exception.Severity,
                 Host = exception.HostName,
                 Text = exception.ToString(),
-                Title = exception.Message
+                Title = exception.Message,
+                Tags = tags ?? new List<string>()
             };
 
             return await _eventDestination.Publish(houndEvent);

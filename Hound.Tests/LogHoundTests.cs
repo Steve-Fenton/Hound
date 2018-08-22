@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Hound.Tests
@@ -24,6 +25,20 @@ namespace Hound.Tests
             catch (HoundException ex)
             {
                 HoundResult result = LogHound.LogException(_testApiKey, ex);
+                result.IsSuccess.ShouldBeTrue();
+            }
+        }
+
+        [Fact]
+        public void TestExceptionWithTagsShouldBeSuccess()
+        {
+            try
+            {
+                throw new TestException("Hound-001", "Sheridan Le Fanu");
+            }
+            catch (HoundException ex)
+            {
+                HoundResult result = LogHound.LogException(_testApiKey, ex, new List<string>() { "test", "exception" });
                 result.IsSuccess.ShouldBeTrue();
             }
         }
