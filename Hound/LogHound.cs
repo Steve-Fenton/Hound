@@ -1,6 +1,7 @@
 ﻿using Hound.Result;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hound
 {
@@ -47,7 +48,8 @@ namespace Hound
         private static IExceptionDestination Log(string apiKey)
         {
             IEventDestination eventDestination = new DogEvents(apiKey);
-            return new DogExceptions(eventDestination);
+            IExceptionDestination exceptionDestination = new DogExceptions(eventDestination);
+            return Task.Run(async() => await exceptionDestination.Publish(exception)).Result;
         }
     }
 }
