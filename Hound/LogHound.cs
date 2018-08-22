@@ -12,7 +12,7 @@ namespace Hound
             try
             {
                 HoundException houndException = CastException(exception);
-                return Log(apiKey).Publish(houndException).Result;
+                return Task.Run(async() => await Log(apiKey).Publish(houndException)).Result;
             }
             catch (Exception ex)
             {
@@ -25,7 +25,7 @@ namespace Hound
             try
             {
                 HoundException houndException = CastException(exception);
-                return Log(apiKey).Publish(houndException, tags).Result;
+                return Task.Run(async() => await Log(apiKey).Publish(houndException, tags)).Result;
             }
             catch (Exception ex)
             {
@@ -48,8 +48,7 @@ namespace Hound
         private static IExceptionDestination Log(string apiKey)
         {
             IEventDestination eventDestination = new DogEvents(apiKey);
-            IExceptionDestination exceptionDestination = new DogExceptions(eventDestination);
-            return Task.Run(async() => await exceptionDestination.Publish(exception)).Result;
+            return new DogExceptions(eventDestination);
         }
     }
 }
